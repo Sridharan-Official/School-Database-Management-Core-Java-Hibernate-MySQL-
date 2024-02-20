@@ -161,11 +161,11 @@ public class App {
 		ClassroomServices classroomServices=new ClassroomServices();
 
 		System.out.println("Enter the Staff Name : ");
-		String staffName=scanner.nextLine();
+		String staffName=scanner.next();
 		System.out.println("Enter the Staff Address : ");
-		String address=scanner.nextLine();
+		String address=scanner.next();
 		System.out.println("Enter the subject : ");
-		String subject=scanner.nextLine();
+		String subject=scanner.next();
 		System.out.println("Enter the Staff Phone Number :");
 		Long staffPhoneNumber=scanner.nextLong();
 		System.out.println("Enter the Staff Email Id :");
@@ -179,7 +179,6 @@ public class App {
 		List<Classroom> classes=new ArrayList<Classroom>();
 
 		boolean flag=true;
-		System.out.println("Enter the number of classes : ");
 
 		while(flag){
 			System.out.println("Enter the classroom name");
@@ -189,8 +188,8 @@ public class App {
 			if(c!=null) 
 				classes.add(c);
 			else 
-				System.err.println("Enter the Valid class");
-			System.out.println("if wnat to enter more press 1 else any number");
+				System.err.println("Enter the Valid class..........");
+			System.out.println("if want to enter more press 1 else any number");
 			Integer f=scanner.nextInt();
 			if(f!=1)
 				flag=false;
@@ -222,32 +221,39 @@ public class App {
 				+ "3. Email Modification\n4. Address Modification\n"
 				+ "5. get out of this Service");
 		int key=scanner.nextInt();
-		System.out.println("Emter the Staff ID : ");
-		int sid=scanner.nextInt();
+		
 		switch (key) {
 		case 1:
+			System.out.println("Emter the Staff ID : ");
+			int sid=scanner.nextInt();
 			System.out.println("Enter the Modified Salary :");
 			Double sal=scanner.nextDouble();
 			service.salaryModification(sid, sal);
 			break;
 		case 2:
+			System.out.println("Emter the Staff ID : ");
+			int sid1=scanner.nextInt();
 			System.out.println("Enter the Phone Number :");
 			Long num=scanner.nextLong();
-			service.phoneNumberModification(sid, num);
+			service.phoneNumberModification(sid1, num);
 			break;
 		case 3:
+			System.out.println("Emter the Staff ID : ");
+			int sid2=scanner.nextInt();
 			System.out.println("Enter the Email :");
 			String mail=scanner.next();
-			service.emailModification(sid, mail);
+			service.emailModification(sid2, mail);
 			break;
 		case 4:
+			System.out.println("Emter the Staff ID : ");
+			int sid3=scanner.nextInt();
 			System.out.println("Enter the Address :");
 			String address=scanner.next();
-			service.addressModification(sid, address);
+			service.addressModification(sid3, address);
 			break;
 
 		default:
-			return;
+			break;
 		}
 
 	}
@@ -319,6 +325,11 @@ public class App {
 		return services.getStaff(staffId);
 	}
 
+	public void displayStaff(int staffId) {
+		StaffServices services=new StaffServices();
+		services.displayStaff(staffId);
+	}
+	
 	public void addStudent() {
 		System.out.println(scanner.hasNextLine());
 		System.out.println("Enter the Student Name :");
@@ -439,23 +450,28 @@ public class App {
 		System.out.println("Enter\n1. Student Address\n2. Student Email Id"
 				+ "\n3. Student Phone Number\n4. get out of this Service");
 		int key=scanner.nextInt();
-		System.out.println("Enter the Student Id :");
-		int studentId=scanner.nextInt();
+		
 		switch (key) {
 		case 1:
+			System.out.println("Enter the Student Id :");
+			int studentId=scanner.nextInt();
 			System.out.println("Enter the Modified Student Address :");
 			String studentAddress=scanner.nextLine();
 			service.modifyStudentAddress(studentId, studentAddress);
 			break;
 		case 2:
+			System.out.println("Enter the Student Id :");
+			int studentId1=scanner.nextInt();
 			System.out.println("Enter the Modified Student Email Id :");
 			String mail=scanner.next();
-			service.modifyStudentEmailId(studentId,mail);
+			service.modifyStudentEmailId(studentId1,mail);
 			break;
 		case 3:
+			System.out.println("Enter the Student Id :");
+			int studentId2=scanner.nextInt();
 			System.out.println("Enter the Modified Phone Number :");
 			Long num=scanner.nextLong();
-			service.modfiyStudentPhoneNumber(studentId, num);
+			service.modfiyStudentPhoneNumber(studentId2, num);
 			break;
 
 		default:
@@ -471,21 +487,17 @@ public class App {
 
 	public static void main(String[] args) {
 
-
-
-//		basicEntry();
-
 		boolean flag = true;
 
 		while (flag) {
-			System.out.println("Enter the option for the service:\n101.Basic Entry for school\n1. Add Student\n2. Remove Student"
+			System.out.println("\nEnter the option for the service:\n101.Basic Entry for school\n1. Add Student\n2. Remove Student"
 					+ "\n3. Pay Fees\n4. Change Student Details\n5. To see the details about the student");
 
 			System.out.println("6. Add Staff\n7. Remove Staff\n8. change Staff details\n9. Add Staff Attendance"
 					+ "\n10. Change classes for Staff\n11. To see the Staff Details");
 
-			System.out.println("12. Add classroom\n13. Remove Classroom\n14. Change The class Teacher"
-					+ "\n15. To see the class Strength\n16. To see the Details of the classRoom");
+			System.out.println("12. Add classroom\n13. Change The class Teacher"
+					+ "\n14. To see the class Strength\n15. To see the Details of the classRoom");
 			System.err.println("Enter 0 to END the SERVICE");
 
 			int key = scanner.nextInt();
@@ -534,10 +546,10 @@ public class App {
 				int staffId=scanner.nextInt();
 				Staff staff=app.getStaff(staffId);
 				if(staff!=null) {
-					System.out.println(staff.toString());
+					app.displayStaff(staffId);
 				}
 				else {
-					System.err.println("Staff Id Was NOt found in the database......");
+					System.err.println("Staff Id Was Not Found in the Database......");
 				}
 				break;
 			case 12:
@@ -546,17 +558,14 @@ public class App {
 				app.addClassroom(cid);
 				break;
 			case 13:
-				app.removeClassroom();
-				break;
-			case 14:
 				app.changeClassTeacher();
 				break;
-			case 15:
+			case 14:
 				int c=app.strength();
 				if(c!=-1) 
 					System.out.println(c);
 				break;
-			case 16:
+			case 15:
 				System.out.println("Enter the classroom Name :");
 				String classroomName=scanner.next();
 				Classroom cls=app.getClassroom(classroomName);
@@ -566,6 +575,7 @@ public class App {
 				else {
 					System.err.println("Classroom Was Not in the Database......");
 				}
+				break;
 			case 101:
 				basicEntry();
 				break;

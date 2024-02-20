@@ -2,18 +2,20 @@ package com.school.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 @Entity
 public class Classroom {
 
 	@Id
 	private String classroomName;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Staff classTeacher;
 	@OneToMany(fetch = FetchType.EAGER)
 	List<Student> students;
@@ -38,8 +40,10 @@ public class Classroom {
 	}
 	@Override
 	public String toString() {
-		return "Classroom [classroomName=" + classroomName + ", classTeacher=" + classTeacher + ", students=" + students
-				+ "]";
+	    
+	    return "Classroom [classroomName=" + classroomName 
+	            + ", classTeacher=" + (classTeacher == null ? "null" : classTeacher.getStaffName())
+	            + ", students=" + students.size() + "]";
 	}
 	
 	

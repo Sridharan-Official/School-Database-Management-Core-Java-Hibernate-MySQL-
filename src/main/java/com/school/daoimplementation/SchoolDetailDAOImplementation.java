@@ -89,10 +89,7 @@ public class SchoolDetailDAOImplementation implements SchoolDetailDAO{
 		int id=query.list().get(0);
 
 		SchoolDetails details=session.find(SchoolDetails.class, id);
-		
-		Double amt=details.getSchoolRevenue()+amount;
-
-		details.setSchoolRevenue(amt);
+		details.setSchoolRevenue(amount);
 		session.update(details);
 		transaction.commit();
 		session.close();
@@ -109,6 +106,22 @@ public class SchoolDetailDAOImplementation implements SchoolDetailDAO{
 		SchoolDetails details=session.find(SchoolDetails.class, id);
 
 		details.setSchoolClassroom(classrooms);
+		session.update(details);
+		transaction.commit();
+		session.close();
+		
+	}
+	
+	public void modifySchoolStaff(List<Staff> staffs) {
+		Session session=factory.openSession();
+		Transaction transaction=session.beginTransaction();
+		
+		Query<Integer> query=session.createQuery("select s.id from SchoolDetails s",Integer.class);
+		int id=query.list().get(0);
+		
+		SchoolDetails details=session.find(SchoolDetails.class, id);
+
+		details.setSchoolStaff(staffs);
 		session.update(details);
 		transaction.commit();
 		session.close();

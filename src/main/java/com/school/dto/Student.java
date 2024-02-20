@@ -23,6 +23,7 @@ public class Student {
 	@Column(unique = true,nullable = false)
 	private String email;
 	@ManyToOne
+	@JoinColumn(name ="student_classroom")
 	private Classroom classroom;
 	private Long phoneNumber;
 	private Parent parentDetails;
@@ -96,9 +97,12 @@ public class Student {
 	public String toString() {
 		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentGender=" + studentGender
 				+ ", studentAge=" + studentAge + ", studentAddress=" + studentAddress + ", email=" + email
-				+ ", classroom=" + classroom + ", phoneNumber=" + phoneNumber + ", parentDetails=" + parentDetails
-				+ ", feesDetails=" + feesDetails + "]";
+				+ ", classroom=" + classroom.getClassroomName() + ", phoneNumber=" + phoneNumber + ", parentDetails=" + parentDetails.toString()
+				+ ", fees=" + feesDetails.getFees() +", feesPaid="+ feesDetails.getFeesPaid()+"]";
 	}
+	
+
+
 
 	
 }

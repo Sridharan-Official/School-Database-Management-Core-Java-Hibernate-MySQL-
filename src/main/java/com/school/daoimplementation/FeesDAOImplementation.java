@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.school.dao.FeesDAO;
+import com.school.dao.SchoolExpensesDAO;
 import com.school.dto.Fees;
 import com.school.dto.Student;
 
@@ -40,9 +41,13 @@ public class FeesDAOImplementation implements FeesDAO{
 			session.update(fee);
 			t.commit();
 			System.out.println("Fees Was Updated......");
+			
+			SchoolExpensesDAO schoolExpensesDAO=new schoolExpensesDAoImplementation();
+			schoolExpensesDAO.modifyStudentFeesPending(-feesPaid);
+			
 		}
 		else {
-			System.out.println("Amount you Paid was Invalid");
+			System.err.println("Amount you Trying to pay was Invalid");
 		}	
 		session.close();
 	

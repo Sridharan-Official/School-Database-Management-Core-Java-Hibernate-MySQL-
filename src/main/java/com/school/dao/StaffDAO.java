@@ -16,5 +16,6 @@ public interface StaffDAO {
 	void addAttendance(int sid,Double addtentance);
 	void changeClasses(int sid,List<Classroom> classes);
 	Staff getStaff(int staffId);
+	void displayStaff(int staffId);
 	
 }

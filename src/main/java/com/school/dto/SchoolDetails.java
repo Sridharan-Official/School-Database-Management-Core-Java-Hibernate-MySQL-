@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class SchoolDetails {
 	@Column(nullable = false)
 	private String address;
 	@Column(nullable = false)
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Staff> schoolStaff;
 	@OneToMany
 	private List<Classroom> SchoolClassroom;

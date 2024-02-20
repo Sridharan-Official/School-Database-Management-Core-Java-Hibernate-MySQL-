@@ -48,7 +48,7 @@ public class schoolExpensesDAoImplementation implements SchoolExpensesDAO{
 		try {
 			Double fee=expenses.getStudentFees()+fees;
 			expenses.setStudentFees(fee);
-			SchoolDetailDAO schoolDetailDAO=new SchoolDetailDAOImplementation();
+			SchoolDetailDAO schoolDetailDAO=new SchoolDetailDAOImplementation();	
 			schoolDetailDAO.modifySchoolRevenue(expenses.getStudentFees()-expenses.getStudentFeesPending());
 		}
 		catch(Exception e) {
@@ -69,8 +69,8 @@ public class schoolExpensesDAoImplementation implements SchoolExpensesDAO{
 		int expenseId = query.list().get(0);
 
 		SchoolExpenses expenses=session.find(SchoolExpenses.class, expenseId);
-		Double sal=expenses.getStudentFeesPending()+fees;
-		expenses.setStudentFeesPending(sal);
+		Double fee=expenses.getStudentFeesPending()+fees;
+		expenses.setStudentFeesPending(fee);
 		session.update(expenses);
 		transaction.commit();
 		session.close();

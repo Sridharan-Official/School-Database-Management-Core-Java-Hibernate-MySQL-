@@ -63,4 +63,10 @@ public class StaffServices {
 		return staffDAO.getStaff(staffId);
 	}
 
+	public void displayStaff(int staffId) {
+		StaffDAO staffDAO=new StaffDAOImplementation();
+		staffDAO.displayStaff(staffId);
+		
+	}
+
 }

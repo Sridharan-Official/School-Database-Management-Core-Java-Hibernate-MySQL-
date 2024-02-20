@@ -3,12 +3,15 @@ package com.school.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+
 
 @Entity
 public class Staff {
@@ -28,7 +31,7 @@ public class Staff {
 	private Double staffSalary;
 	@Column(nullable = false)
 	private Double staffAttendance;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<Classroom> classes;
 
 	public int getStaffId() {
@@ -82,12 +85,26 @@ public class Staff {
 	public void setStaffPhoneNumber(long staffPhoneNumber) {
 		this.staffPhoneNumber = staffPhoneNumber;
 	}
+	
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", staffName=" + staffName + ", staffAddress=" + staffAddress
-				+ ", staffPhoneNumber=" + staffPhoneNumber + ", staffEmail=" + staffEmail + ", subject=" + subject
-				+ ", staffSalary=" + staffSalary + ", staffAttendance=" + staffAttendance + ", classes=" + classes
-				+ "]";
+	    
+	    return "Staff [staffId=" + staffId + ", staffName=" + staffName + ", staffAddress=" + staffAddress
+	            + ", staffPhoneNumber=" + staffPhoneNumber + ", staffEmail=" + staffEmail + ", subject=" + subject
+	            + ", staffSalary=" + staffSalary + ", staffAttendance=" + staffAttendance +", Classes=[";
+	}
+	
+	public String classReturn() {
+		
+		
+		
+		String str=""+classes!=null?classes.get(0).getClassroomName():"null";
+		
+		for(int i=1;i<classes.size();i++) {
+			str=str+", "+classes.get(i).getClassroomName();
+		}
+		str+=" ]]";
+		return str;
 	}
 
 	

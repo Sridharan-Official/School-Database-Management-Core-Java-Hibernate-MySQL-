@@ -44,6 +44,12 @@ public class StudentDAOImplemention implements StudentDAO{
 		Transaction transaction=session.beginTransaction();
 		Student student=session.find(Student.class, sid);
 		if(student!=null) {
+			Classroom classroom=student.getClassroom();
+			List<Student> students=classroom.getStudents();
+			students.remove(students.indexOf(student));
+			classroom.setStudents(students);
+			ClassroomDAO classroomDAO=new ClassroomDAOImplementation();
+			classroomDAO.updateClassroom(classroom);
 			session.remove(student);
 			transaction.commit();
 			session.close();
@@ -53,12 +59,7 @@ public class StudentDAOImplemention implements StudentDAO{
 
 			expensesDAO.modifyStudentFeesPending(-(student.getFeesDetails().getFees()-student.getFeesDetails().getFeesPaid()));
 			
-			Classroom classroom=student.getClassroom();
-			List<Student> students=classroom.getStudents();
-			students.remove(students.indexOf(student));
-			classroom.setStudents(students);
-			ClassroomDAO classroomDAO=new ClassroomDAOImplementation();
-			classroomDAO.updateClassroom(classroom);
+			
 			
 		}
 		else {

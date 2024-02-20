@@ -12,6 +12,5 @@ public class SchoolDetailService {
 		detailDAO.enterSchoolInfo(schoolDetails);
 		
 	}
-	
 
 }
